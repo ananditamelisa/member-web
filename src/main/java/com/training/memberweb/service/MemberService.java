@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface MemberService {
     Member create (Member member);
-    Member findById (String id);
+    Member findById (Long id);
     List<Member> findAll ();
     Member update (Member member);
-    Member delete (String id);
+    Member delete (Long id);
 }

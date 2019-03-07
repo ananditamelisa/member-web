@@ -4,11 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name="members")
 public class Member {
-    private String memberID;
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long memberID;
     private String name;
     private String email;
     private String phoneNumber;

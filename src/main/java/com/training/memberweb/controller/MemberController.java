@@ -32,7 +32,7 @@ public class MemberController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Member findById (@PathVariable("idMember") String id){
+    public Member findById (@PathVariable("idMember") Long id){
         return memberService.findById(id);
     }
 
@@ -61,7 +61,7 @@ public class MemberController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Member delete (@PathVariable("idMember") String id){
+    public Member delete (@PathVariable("idMember") Long id){
         return memberService.delete(id);
     }
 

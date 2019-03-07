@@ -1,48 +1,60 @@
 package com.training.memberweb.service;
 
 import com.training.memberweb.Member;
+import com.training.memberweb.Repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MemberServiceImpl implements MemberService {
+
+    @Autowired
+    private MemberRepository memberRepository;
     private ArrayList<Member> list = new ArrayList<>();
     @Override
     public Member create(Member member) {
-        list.add(member);
-        return member;
+       memberRepository.save(member);
+       return member;
     }
 
     @Override
-    public Member findById(String id) {
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).getMemberID().equals(id)){
-                return list.get(i);
-            }
+    public Member findById(Long id) {
+        Optional<Member> byId = memberRepository.findById(id);
+        if(byId.isPresent()){
+            return byId.get();
+        }else{
+            return null;
         }
-        return null;
     }
 
     @Override
     public List<Member> findAll() {
-        return list;
+        return memberRepository.findAll();
     }
 
     @Override
     public Member update(Member member) {
-        Member mb = findById(member.getMemberID());
-        if(mb==null) return null;
-        list.set(list.indexOf(mb), member);
-        return member;
+        Optional<Member> byId = memberRepository.findById(member.getMemberID());
+        if(byId.isPresent()){
+            return memberRepository.save(member);
+        }else{
+            return null;
+        }
     }
 
     @Override
-    public Member delete(String id) {
-        Member mb = findById(id);
-        if(mb==null) return null;
-        list.remove(findById(id));
-        return mb;
+    public Member delete(Long id) {
+        Optional<Member> byId = memberRepository.findById(id);
+        if(byId.isPresent()){
+            Member m = byId.get();
+            memberRepository.delete(byId.get());
+            return m;
+        }else{
+            return null;
+        }
     }
 }
