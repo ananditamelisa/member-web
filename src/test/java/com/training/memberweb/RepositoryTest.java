@@ -79,16 +79,17 @@ public class RepositoryTest {
         }
     }
 
+    @Test
     public void testDelete(){
-        memberRepository.delete(m2);
-        Assert.assertTrue("harusnya skrg total member tinggal 2",
-                memberRepository.findAll().size()==2);
+        memberRepository.deleteById(create2.getMemberID());
+        Assert.assertFalse("harusnya skrg id dari creat2 udh gaada",
+                memberRepository.existsById(create2.getMemberID()));
     }
 
-    public void testFindByEmail(){
-        Member findByEmail = memberRepository.findByEmail("dita.lisaira@gmail.com");
-        Assert.assertTrue("harusnya ketemu nih email gue",
-                findByEmail.getName().equals("Anandita Melisa"));
-    }
+//    @Test
+//    public void testFindByEmail(){
+//        memberRepository.findByEmail("gilangR@gmail.com");
+//
+//    }
 
 }

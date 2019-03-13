@@ -1,15 +1,14 @@
 package com.training.memberweb.controller;
 
 import com.training.memberweb.Member;
+import com.training.memberweb.model.ApiKey;
 import com.training.memberweb.service.MemberService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class MemberController {
     private MemberService memberService;
 
@@ -41,7 +40,7 @@ public class MemberController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Member> findAll(){
+    public List<Member> findAll(ApiKey apiKey){
         return memberService.findAll();
     }
 
@@ -65,5 +64,12 @@ public class MemberController {
         return memberService.delete(id);
     }
 
+    @RequestMapping(
+            value = "/",
+            method = RequestMethod.GET
+    )
+    public String hello (ApiKey apiKey){
+        return "Hello World";
+    }
 
 }

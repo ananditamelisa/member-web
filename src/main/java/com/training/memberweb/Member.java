@@ -17,6 +17,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long memberID;
     private String name;
+
+    //@Column(unique=true)
     private String email;
     private String phoneNumber;
     private String address;

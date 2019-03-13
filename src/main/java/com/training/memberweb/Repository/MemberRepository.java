@@ -3,9 +3,7 @@ package com.training.memberweb.Repository;
 import com.training.memberweb.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    List<Member> findAllByName(String name);
     Member findByEmail(String email);
 }
