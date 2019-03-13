@@ -12,8 +12,13 @@ import java.util.Optional;
 @Component
 public class MemberServiceImpl implements MemberService {
 
-    @Autowired
+
     private MemberRepository memberRepository;
+    @Autowired
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
     private ArrayList<Member> list = new ArrayList<>();
     @Override
     public Member create(Member member) {
